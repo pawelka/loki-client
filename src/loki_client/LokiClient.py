@@ -88,7 +88,7 @@ class LokiClient(object):
         params = params or {}
 
         if end:
-            if not isinstance(end, datetime):
+            if not isinstance(end, datetime.datetime):
                 return False, {'message': 'Incorrect end type {}, should be type {}.'.format(type(end), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['end'] = int(end.timestamp() * 10 ** 9)
@@ -96,7 +96,7 @@ class LokiClient(object):
             params['end'] = int(datetime.datetime.now().timestamp() * 10 ** 9)
 
         if start:
-            if not isinstance(start, datetime):
+            if not isinstance(start, datetime.datetime):
                 return False, {'message': 'Incorrect start type {}, should be type {}.'.format(type(start), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['start'] = int(start.timestamp() * 10 ** 9)
@@ -139,7 +139,7 @@ class LokiClient(object):
             return False, {'message':'Param label can not be empty.'}
 
         if end:
-            if not isinstance(end, datetime):
+            if not isinstance(end, datetime.datetime):
                 return False, {'message': 'Incorrect end type {}, should be type {}.'.format(type(end), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['end'] = int(end.timestamp() * 10 ** 9)
@@ -147,7 +147,7 @@ class LokiClient(object):
             params['end'] = int(datetime.datetime.now().timestamp() * 10 ** 9)
 
         if start:
-            if not isinstance(start, datetime):
+            if not isinstance(start, datetime.datetime):
                 return False, {'message': 'Incorrect start type {}, should be type {}.'.format(type(start), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['start'] = int(start.timestamp() * 10 ** 9)
@@ -199,7 +199,7 @@ class LokiClient(object):
             return False, {'message': 'The value of limit is not correct.'}
 
         if time:
-            if not isinstance(time, datetime):
+            if not isinstance(time, datetime.datetime):
                 return False, {'message': 'Incorrect time type {}, should be type {}.'.format(type(time), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['time'] = int(time.timestamp() * 10 ** 9)
@@ -250,7 +250,7 @@ class LokiClient(object):
             return False, {'message': 'Param query can not be empty.'}
 
         if end:
-            if not isinstance(end, datetime):
+            if not isinstance(end, datetime.datetime):
                 return False, {'message': 'Incorrect end type {}, should be type {}.'.format(type(end), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['end'] = int(end.timestamp() * 10 ** 9)
@@ -258,7 +258,7 @@ class LokiClient(object):
             params['end'] = int(datetime.datetime.now().timestamp() * 10 ** 9)
 
         if start:
-            if not isinstance(start, datetime):
+            if not isinstance(start, datetime.datetime):
                 return False, {'message': 'Incorrect start type {}, should be type {}.'.format(type(start), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['start'] = int(start.timestamp() * 10 ** 9)
@@ -319,7 +319,7 @@ class LokiClient(object):
             return False, {'message': 'Param query can not be empty.'}
 
         if end:
-            if not isinstance(end, datetime):
+            if not isinstance(end, datetime.datetime):
                 return False, {'message': 'Incorrect end type {}, should be type {}.'.format(type(end), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['end'] = int(end.timestamp() * 10 ** 9)
@@ -327,7 +327,7 @@ class LokiClient(object):
             params['end'] = int(datetime.datetime.now().timestamp() * 10 ** 9)
 
         if start:
-            if not isinstance(start, datetime):
+            if not isinstance(start, datetime.datetime):
                 return False, {'message': 'Incorrect start type {}, should be type {}.'.format(type(start), datetime)}
             # Convert to int, or will be scientific notation, which will result in request exception
             params['start'] = int(start.timestamp() * 10 ** 9)
@@ -368,7 +368,7 @@ class LokiClient(object):
 
         for result_item in key_log_result['data']['result']:
             labels = result_item['stream']
-            file_name = result_item['stream']['filename']
+            file_name = result_item['stream']['filename'] if 'filename' in result_item['stream'] else ''
             file_datas = []
             for value_item in result_item['values']:
                 cur_ts = int(value_item[0])
